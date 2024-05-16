@@ -37,7 +37,10 @@ nav {
 }
 
 nav .logo {
-    width: 170px;
+    position: absolute;
+    top: -18px;
+    width: 100px;
+    left: 50px; 
 }
 
 nav .menu-icon {
@@ -88,14 +91,14 @@ nav ul li a:hover {
 .text h2 {
     font-size: 20px;
     border: 1px solid; color: black;
-    color: beige;
+    color: black;
     padding: 10px 20px;
 }
 
 .text h3 {
     font-size: 20px;
-    border: 1px solid; color: black;
-    color: beige;
+    border: 1px solid color: black;
+    color: black;
     padding: 10px 20px;
 }
 

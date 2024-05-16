@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,10 +8,10 @@
     <link rel="stylesheet" href="styles.css">
     <title>jo2024</title>
 </head>
-<body>
+<body class="overlay">
     <header>
         <nav>
-            <a href="#"><img src="Photo JO2 logo.png" alt="" class="logo"></a>
+            <a href="#"><img src="{% static 'photoJO2logo.png' %}" alt="" class="logo"></a>
             <ul>
                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
                 <li><a href="{% url 'billetterie' %}">Billetterie</a></li>
@@ -41,7 +42,7 @@
         Cette discipline emblématique des jeux comportera une variété d’épreuves et le plus de participants.</p>
     </section>
 
-    <div class="overlay">
+    <div>
 
     </div>
 </body>
@@ -61,15 +62,15 @@ body {
 }
 
 .overlay {
-    position: absolute;
+    position: center;
     top: 0;
     left: 0;
     bottom: 0;
     width: 100%;
     height: 200vh;
-    background: url('JO2.jpg') center center no-repeat;
-    background-size: cover;
-    z-index: -100;
+    background: url('{% static "photoJO1.jpg" %}') center center no-repeat;
+    background-size: 100%;
+    z-index: -150;
 }
 
 header {
@@ -88,7 +89,10 @@ nav {
 }
 
 nav .logo {
-    width: 170px;
+    position: absolute;
+    top: -18px;
+    width: 100px;
+    left: 50px; 
 }
 
 nav .menu-icon {
@@ -139,14 +143,14 @@ nav ul li a:hover {
 .text h2 {
     font-size: 20px;
     border: 1px solid; color: black;
-    color: #0000;
+    color: black;
     padding: 10px 20px;
 }
 
 .text h3 {
     font-size: 20px;
-    border: 1px solid color: #0000;
-    color: #0000;
+    border: 1px solid color: black;
+    color: black;
     padding: 10px 20px;
 }
 

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +11,7 @@
 <body>
     <header>
         <nav>
-            <a href="#"><img src="Photo JO2 logo.png" alt="" class="logo"></a>
+            <a href="#"><img src="{% static 'photoJO2logo.png' %}" alt="" class="logo"></a>
             <ul>
                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
                 <li><a href="{% url 'billetterie' %}">Billetterie</a></li>
@@ -64,7 +65,10 @@ nav {
 }
 
 nav .logo {
-    width: 170px;
+    position: absolute;
+    top: -18px;
+    width: 100px;
+    left: 50px; 
 }
 
 nav .menu-icon {
