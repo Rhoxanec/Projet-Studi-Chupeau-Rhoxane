@@ -12,10 +12,10 @@
         <nav>
             <a href="#"><img src="Photo JO2 logo.png" alt="" class="logo"></a>
             <ul>
-                <li><a href="Accueil.html">Accueil</a></li>
-                <li><a href="Billetterie.html">Billetterie</a></li>
-                <li><a href="Mon Compte.html">Mon Compte</a></li>
-                <li><a href="Panier.html">Panier</a></li>
+                <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'billetterie' %}">Billetterie</a></li>
+                <li><a href="{% url 'moncompte' %}">Mon Compte</a></li>
+                <li><a href="{% url 'panier' %}">Panier</a></li>
                 <button><a href="{% url 'deconnexion' %}">Déconnexion</a></button>
             </ul>
         </nav>
