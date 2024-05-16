@@ -4,8 +4,22 @@ from .form import CustomUserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 # Create your views here.
+
+def accueil(request):
+    return render(request, 'accueil.html')
+
+def billetterie(request):
+    return render(request, 'billetterie.html')
+
+def moncompte(request):
+    return render(request, 'moncompte.html')
+
+def panier(request):
+    return render(request, 'panier.html')
+
 def inscription(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -35,3 +49,4 @@ def accueil(request):
 def deconnexion(request):
     logout(request)
     return redirect('connexion')
+
