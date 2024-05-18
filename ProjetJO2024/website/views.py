@@ -19,8 +19,8 @@ def billetterie(request):
 def moncompte(request):
     return render(request, 'moncompte.html')
 
-def panier(request):
-    return render(request, 'panier.html')
+#def panier(request):
+#    return render(request, 'panier.html')
 
 def inscription(request):
     if request.method == 'POST':
@@ -45,10 +45,10 @@ def connexion(request):
     return render(request, 'connexion.html')
 
 @login_required
-def accueil(request):
-    return render(request, 'accueil.html')
+#def panier(request):
+#return render(request, 'panier.html')
 
 def deconnexion(request):
     logout(request)
-    return redirect('connexion')
+    return render(request, 'accueil.html')
 

@@ -11,8 +11,9 @@ urlpatterns = [
     path('accueil/', views.accueil, name= 'accueil'),
     path('billetterie/', views.billetterie, name='billetterie'),
     path('moncompte/', views.moncompte, name='moncompte'),
-    path('panier/', views.panier, name='panier'),
+   # path('panier/', views.panier, name='panier'),
     path('connexion/', views.connexion, name='connexion'),
     path('deconnexion/', views.deconnexion, name='deconnexion'),
+    path('panier/', include('panier.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
