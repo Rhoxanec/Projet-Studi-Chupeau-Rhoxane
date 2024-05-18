@@ -31,11 +31,12 @@
                                 </br>
                                     <!-- Product price-->
                                     {{ offre.price }}€
+                                
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Ajoutez au panier</a></div>
+                                <div class="text-center"><button type="button" value="{{ offre.id }}" class="btn btn-secondary" id="add_cart">Ajoutez au panier</button></div>
                             </div>
                         </div>
                     </div>
@@ -44,8 +45,30 @@
                     
                    
         </section>
-        
+              
     </body>
-
+    
+    <script>
+        // Vérifier si le bouton a été cliqué
+        $(document).on('click', '#add_cart', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'panier_add' %}',
+                data: {
+                    offre_id: $('#add_cart').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post',
+                },
+                success: function(json){
+                    console.log(json)
+                },
+                error: function(xhr, errmsg, err){
+    
+                }
+            });
+        })
+    
+    </script> 
 {% endblock %}
 
