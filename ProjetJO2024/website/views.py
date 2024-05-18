@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from .models import Offre
 
 # Create your views here.
 
@@ -12,7 +13,8 @@ def accueil(request):
     return render(request, 'accueil.html')
 
 def billetterie(request):
-    return render(request, 'billetterie.html')
+    offres = Offre.objects.all()
+    return render(request, 'billetterie.html', {'offres': offres})
 
 def moncompte(request):
     return render(request, 'moncompte.html')
