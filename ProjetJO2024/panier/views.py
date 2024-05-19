@@ -6,7 +6,9 @@ from django.http import JsonResponse
 # Create your views here.
 
 def panier_summary(request):
-    return render(request, 'panier_summary.html', {})
+    panier = Panier(request)
+    panier_offres = panier.get_offres
+    return render(request, 'panier_summary.html', {"panier_offres":panier_offres})
 
 def panier_add(request):
     panier = Panier(request)
@@ -14,8 +16,12 @@ def panier_add(request):
         offre_id = int(request.POST.get('offre_id'))
         offre = get_object_or_404(Offre, id=offre_id)
         panier.add(offre=offre)
-        response = JsonResponse({'offre nom: ': offre.name})
+        # Obtenir la quantité du panier
+        panier_quantity = panier.__len__()
 
+        # Renvoie la réponse 
+        # response = JsonResponse({'offre nom: ': offre.name})
+        response = JsonResponse({'qty':panier_quantity})
         return response
 
 def panier_delete(request):

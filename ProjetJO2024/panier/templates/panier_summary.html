@@ -9,15 +9,43 @@
                 </div>
             </div>
 </header>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<div class="container">
+{% if panier_offres %}
+    {% for offres in panier_offres %}
+
+    <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ billet.image.url }}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              
+              <div class="text-center">
+              <h5 class="card-title">{{ offre.name }}</h5>
+              <p class="card-text">{{ offre.description }}</p>
+              <p class="card-text">{{ offre.price }}€</p>
+            <!-- <a href="{% url 'billetterie' %}" class="btn btn-secondary">Billetterie</a>
+              <button type="button" value="{{ billet.id }}" class="btn btn-secondary" id="ajouter-offre">Ajoutez au panier</button></div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    <br></br>
+    {% endfor %}
+{% else %}
+    <p>Votre panier est vide</p>
+{% endif %}
+</div>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
 
        
 {% endblock %}

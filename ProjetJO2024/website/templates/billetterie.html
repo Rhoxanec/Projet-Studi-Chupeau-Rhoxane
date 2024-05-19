@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<body>
+
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
@@ -15,7 +15,7 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <!-- Offre solo-->
-                    {% for offre in offres %}
+                {% for offre in offres %}
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
@@ -25,50 +25,33 @@
                                 <div class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ offre.name }}</h5>
-                                </br>
+                                    <br></br>
                                     {{ offre.description }}
-                            </br>
-                                </br>
+                                    <br></br>
+                                    <br></br>
                                     <!-- Product price-->
                                     {{ offre.price }}€
+                                    <!-- Id-->
+                                    {{ offre.id }}
+                                    
                                 
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><button type="button" value="{{ offre.id }}" class="btn btn-secondary" id="add_cart">Ajoutez au panier</button></div>
+                                <div class="text-center">
+                                    <a href="{% url 'billet' offre.id %}" class="btn btn-secondary">Voir Offre</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                {% endfor %}
+                </div>
+            </div>
 
                     
                    
         </section>
               
-    </body>
-    
-    <script>
-        // Vérifier si le bouton a été cliqué
-        $(document).on('click', '#add_cart', function(e){
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '{% url 'panier_add' %}',
-                data: {
-                    offre_id: $('#add_cart').val(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    action: 'post',
-                },
-                success: function(json){
-                    console.log(json)
-                },
-                error: function(xhr, errmsg, err){
-    
-                }
-            });
-        })
-    
-    </script> 
 {% endblock %}
 

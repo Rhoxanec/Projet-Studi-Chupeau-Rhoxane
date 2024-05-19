@@ -1,3 +1,5 @@
+from website.models import Offre
+
 class Panier():
     def __init__(self, request):
         self.session = request.session 
@@ -17,5 +19,13 @@ class Panier():
         if offre_id in self.panier: 
             pass
         else: 
-            self.panier [offre_id] = {'price': str(offre.price)}
+            self.panier[offre_id] = {'price': str(offre.price)}
         self.session.modified = True
+
+    def __len__(self):
+        return len(self.panier)
+    
+    def get_offres(self):
+        offre_ids = self.panier.keys()
+        offres = Offre.objects.filter(id__in=offre_ids)
+        return offres

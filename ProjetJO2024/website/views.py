@@ -16,6 +16,10 @@ def billetterie(request):
     offres = Offre.objects.all()
     return render(request, 'billetterie.html', {'offres': offres})
 
+def billet(request,pk):
+    billet = Offre.objects.get(id=pk)
+    return render(request, 'billet.html', {'billet': billet})
+
 def moncompte(request):
     return render(request, 'moncompte.html')
 
@@ -51,4 +55,5 @@ def connexion(request):
 def deconnexion(request):
     logout(request)
     return render(request, 'accueil.html')
+
 
