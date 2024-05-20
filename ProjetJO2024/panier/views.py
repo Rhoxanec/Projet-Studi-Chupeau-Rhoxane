@@ -9,7 +9,8 @@ def panier_summary(request):
     panier = Panier(request)
     panier_offres = panier.get_offres()
     quantities = panier.get_quantity()
-    return render(request, 'panier_summary.html', {"panier_offres":panier_offres, 'quantities':quantities})
+    totals = panier.total()
+    return render(request, 'panier_summary.html', {"panier_offres":panier_offres, 'quantities':quantities, "totals":totals})
 
 
 def panier_add(request):
@@ -29,7 +30,13 @@ def panier_add(request):
         return response
 
 def panier_delete(request):
-    return render(request, 'panier_delete.html', {})
+    panier = Panier(request)
+    if request.POST.get('action')=='post':
+        offre_id = int(request.POST.get('offre_id'))
+
+        panier.delete(offre=offre_id)
+        response = JsonResponse({"offre": offre_id})
+        return response
 
 def panier_update(request):
     panier = Panier(request)

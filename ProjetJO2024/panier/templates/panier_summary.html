@@ -35,9 +35,6 @@
                   {% for key, value in quantities.items %}
                     {% if key == offre.id|slugify %}
                   <option selected>{{ value }}</option>
-                    {% endif %}
-
-                  {% endfor %}
                
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -45,9 +42,13 @@
               </select>
             </div>
               
-              <p class="card-text">{{ offre.price }}€</p>
+              <p class="card-text">Prix unitaire {{ offre.price }}€</p>
+                    {% endif %}
+
+                {% endfor %}
             <!-- <a href="{% url 'billetterie' %}" class="btn btn-secondary">Billetterie</a>-->
-              <button type="button" data-index="{{ offre.id }}" class="btn btn-secondary update-offre">Mettre à jour le panier</button></div>
+              <button type="button" data-index="{{ offre.id }}" class="btn btn-secondary update-offre">Mettre à jour le panier</button>
+              <button type="button" data-index="{{ offre.id }}" class="btn btn-danger delete-offre">Supprimer</button></div>
           
             </div>
           </div>
@@ -55,6 +56,8 @@
       </div>
     <br></br>
     {% endfor %}
+    <h3>Total: {{ totals }}€</h3>
+
 {% else %}
     <p>Votre panier est vide</p>
 {% endif %}
@@ -66,7 +69,7 @@
 <br></br>
 
 <script>
-  // Vérifier si le bouton a été cliqué
+  // Mise à jour du panier
  $(document).on('click', '.update-offre', function(e){
       e.preventDefault();
       // On récupère l'id de l'offre
@@ -85,6 +88,31 @@
           success: function(json){
               //console.log(json.qty)
               console.log(document.getElementById("panier_quantity").textContent = json.qty)
+              location.reload();
+              
+          },
+          error: function(xhr, errmsg, err){
+
+          }
+      });
+  })
+
+  // Fonction suppression éléments panier
+  $(document).on('click', '.delete-offre', function(e){
+      e.preventDefault();
+      // On récupère l'id de l'offre
+      $.ajax({
+          type: 'POST',
+          url: "{% url 'panier_delete' %}",
+          data: {
+              offre_id: $(this).data('index'),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post',
+          },
+          
+          success: function(json){
+              //console.log(json.qty)
+
               location.reload();
               
           },

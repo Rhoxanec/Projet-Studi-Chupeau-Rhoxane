@@ -48,3 +48,26 @@ class Panier():
 
         thing = self.panier
         return thing
+    
+    def delete(self, offre):
+        offre_id = str(offre)
+        # Supprimer du panier
+        if offre_id in self.panier:
+            del self.panier[offre_id]
+        
+        self.session.modified = True
+    
+
+    def total(self):
+        offre_ids = self.panier
+        offres = Offre.objects.filter(id__in=offre_ids)
+			
+        quantities = self.panier
+        total = 0
+        for key, value in quantities.items():
+            key = int(key)
+            for offre in offres:
+                if offre.id == key:total = total + ( offre.price * value )
+        return total
+
+
