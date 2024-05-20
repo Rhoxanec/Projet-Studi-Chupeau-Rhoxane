@@ -18,15 +18,33 @@ class Panier():
     def add(self, offre, offreqty):
         offre_id = str(offre.id)
         if offre_id in self.panier:
-            self.panier[offre_id]['qty'] += int(offreqty)
+            self.panier[offre_id] += int(offreqty)
         else:
-            self.panier[offre_id] = {"price":str(offre.price), "qty":int(offreqty)}
+            self.panier[offre_id] = int(offreqty)
         self.session.modified = True
 
     def __len__(self):
-        return sum(item["qty"] for item in self.panier.values())
+        return sum(item for item in self.panier.values())
     
     def get_offres(self):
         offre_ids = self.panier.keys()
         offres = Offre.objects.filter(id__in=offre_ids)
         return offres
+    
+    def get_quantity(self):
+        quantities = self.panier
+        return quantities
+    
+    def update(self, offre, quantity):
+        offre_id = str(offre)
+        offre_qty = int(quantity)
+
+        # Récupérer le panier
+        notrepanier = self.panier
+        # Mettre à jour le panier
+        notrepanier[offre_id] = offre_qty
+
+        self.session.modified = True 
+
+        thing = self.panier
+        return thing

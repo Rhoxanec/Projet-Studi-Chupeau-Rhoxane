@@ -28,11 +28,26 @@
               <div class="text-center">
               <h5 class="card-title">{{ offre.name }}</h5>
               <p class="card-text">{{ offre.description }}</p>
-              <p class="cart-text">Quantité billet</p>0
+              <div class="cart-text">Quantité billet:</div>
+              <div class="text-center">
+              <select class="col-md-2" id="select{{offre.id}}">
+                
+                  {% for key, value in quantities.items %}
+                    {% if key == offre.id|slugify %}
+                  <option selected>{{ value }}</option>
+                    {% endif %}
+
+                  {% endfor %}
+               
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="">3</option>
+              </select>
+            </div>
               
               <p class="card-text">{{ offre.price }}€</p>
-            <!-- <a href="{% url 'billetterie' %}" class="btn btn-secondary">Billetterie</a>
-              <button type="button" value="{{ billet.id }}" class="btn btn-secondary" id="ajouter-offre">Ajoutez au panier</button></div>-->
+            <!-- <a href="{% url 'billetterie' %}" class="btn btn-secondary">Billetterie</a>-->
+              <button type="button" data-index="{{ offre.id }}" class="btn btn-secondary update-offre">Mettre à jour le panier</button></div>
           
             </div>
           </div>
@@ -50,6 +65,35 @@
 <br></br>
 <br></br>
 
-       
-{% endblock %}
+<script>
+  // Vérifier si le bouton a été cliqué
+ $(document).on('click', '.update-offre', function(e){
+      e.preventDefault();
+      // On récupère l'id de l'offre
+      console.log($('#select' + offreid + 'option:selected').text());
+      var offreid = $(this).data('index'); 
+      $.ajax({
+          type: 'POST',
+          url: "{% url 'panier_update' %}",
+          data: {
+              offre_id: $(this).data('index'),
+              billetqty: $('#select' + offreid + ' option:selected').text(),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post',
+          },
+          
+          success: function(json){
+              //console.log(json.qty)
+              console.log(document.getElementById("panier_quantity").textContent = json.qty)
+              location.reload();
+              
+          },
+          error: function(xhr, errmsg, err){
 
+          }
+      });
+  })
+
+</script>      
+
+{% endblock %}
