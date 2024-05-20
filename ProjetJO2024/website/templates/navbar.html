@@ -19,33 +19,3 @@
         {% endif %}
     </ul>
 </nav> >
-
-Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#"><img src="{% static 'photoJO2logo.png' %}" alt="" class="logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-
-                    <ul>
-                        <li><a href="{% url 'accueil' %}">Accueil</a></li>
-                        <li><a href="{% url 'billetterie' %}">Billetterie</a></li>
-                        <li><a href="{% url 'moncompte' %}">Mon Compte</a></li>
-                            {% if user.is_authenticated %}
-                            <li><a href="{% url 'deconnexion' %}">Déconnexion</a></li>
-                            {% else %}
-                            <li><a href="{% url 'connexion' %}">Connexion</a></li>
-                            {% endif %}
-                    </ul>
-            </ul>
-            <form class="d-flex">
-                <a href="{% url 'panier_summary' %}" class="btn btn-outline-dark">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart 
-                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="panier_quantity">{{ panier|length }}</span></a>
-            </form>
-            
-        </div>
-    </div>
-</nav>

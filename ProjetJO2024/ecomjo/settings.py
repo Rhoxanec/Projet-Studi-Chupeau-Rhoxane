@@ -16,7 +16,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+PANIER_SESSION_ID ='panier'
 # Application definition
 
 INSTALLED_APPS = [

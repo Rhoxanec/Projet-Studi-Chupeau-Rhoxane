@@ -7,21 +7,23 @@ from django.http import JsonResponse
 
 def panier_summary(request):
     panier = Panier(request)
-    panier_offres = panier.get_offres
+    panier_offres = panier.get_offres()
     return render(request, 'panier_summary.html', {"panier_offres":panier_offres})
 
 def panier_add(request):
     panier = Panier(request)
     if request.POST.get('action')=='post':
         offre_id = int(request.POST.get('offre_id'))
+        offreqty = int(request.POST.get('billetqty'))
+
         offre = get_object_or_404(Offre, id=offre_id)
-        panier.add(offre=offre)
+        panier.add(offre=offre, offreqty=offreqty)
         # Obtenir la quantité du panier
         panier_quantity = panier.__len__()
 
         # Renvoie la réponse 
         # response = JsonResponse({'offre nom: ': offre.name})
-        response = JsonResponse({'qty':panier_quantity})
+        response = JsonResponse({"qty": panier.__len__() })
         return response
 
 def panier_delete(request):

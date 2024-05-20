@@ -20,7 +20,7 @@ class Offre(models.Model):
     image = models.ImageField(upload_to='uploads/offre/', blank=True)
 
     def __str__(self) -> str:
-        return f'{self.name}'
+        return self.name
 
 
 
