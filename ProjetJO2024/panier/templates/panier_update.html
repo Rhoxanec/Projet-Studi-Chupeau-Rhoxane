@@ -1,4 +1,32 @@
-*, *::before, *::after {
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>jo2024</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#"><img src="{% static 'photoJO2logo.png' %}" alt="" class="logo"></a>
+            <ul>
+                <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'billetterie' %}">Billetterie</a></li>
+                <li><a href="{% url 'moncompte' %}">Mon Compte</a></li>
+                <li><a href="{% url 'panier' %}">Panier</a></li>
+                <button><a href="{% url 'deconnexion' %}">Déconnexion</a></button>
+            </ul>
+        </nav>
+    </header>
+
+</html>
+
+<style>
+    /* CSS */
+    *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -94,14 +122,14 @@ nav ul li a:hover {
 .text h2 {
     font-size: 20px;
     border: 1px solid; color: black;
-    color: black;
+    color: beige;
     padding: 10px 20px;
 }
 
 .text h3 {
     font-size: 20px;
-    border: 1px solid color: black;
-    color: black;
+    border: 1px solid; color: black;
+    color: beige;
     padding: 10px 20px;
 }
 
@@ -112,3 +140,4 @@ nav ul li a:hover {
     margin-bottom: 2rem;
 }
 
+</style>

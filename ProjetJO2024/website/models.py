@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 
 
-# Utilisateurs
+# Utilisateur
 class Utilisateur(models.Model):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
@@ -12,19 +12,19 @@ class Utilisateur(models.Model):
     def __str__(self) -> str:
         return f'{self.nom} {self.prenom}' 
 
-# Offres
+# Offre
 class Offre(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
     description = models.CharField(max_length=250, default='', blank=True, null=True)
-    image = models.ImageField(upload_to='uploads/offre/', blank=True, null=True)
+    image = models.ImageField(upload_to='uploads/offre/', blank=True)
 
-    def __str__(self):
-        return self.name 
+    def __str__(self) -> str:
+        return self.name
 
 
 
-# Commandes
+# Commande
 class Commande(models.Model):
     offre = models.ForeignKey(Offre, on_delete=models.CASCADE)
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)

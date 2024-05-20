@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Panier</h1>
+                </div>
+            </div>
+</header>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<div class="container">
+{% if panier_offres %}
+    {% for offre in panier_offres %}
+
+    <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ offre.image.url }}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              
+              <div class="text-center">
+              <h5 class="card-title">{{ offre.name }}</h5>
+              <p class="card-text">{{ offre.description }}</p>
+              <div class="cart-text">Quantité billet:</div>
+              <div class="text-center">
+              <select class="col-md-2" id="select{{offre.id}}">
+                
+                  {% for key, value in quantities.items %}
+                    {% if key == offre.id|slugify %}
+                  <option selected>{{ value }}</option>
+               
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="">3</option>
+              </select>
+            </div>
+              
+              <p class="card-text">Prix unitaire {{ offre.price }}€</p>
+                    {% endif %}
+
+                {% endfor %}
+            <!-- <a href="{% url 'billetterie' %}" class="btn btn-secondary">Billetterie</a>-->
+              <button type="button" data-index="{{ offre.id }}" class="btn btn-secondary update-offre">Mettre à jour le panier</button>
+              <button type="button" data-index="{{ offre.id }}" class="btn btn-danger delete-offre">Supprimer</button></div>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    <br></br>
+    {% endfor %}
+    <h3>Total: {{ totals }}€</h3>
+
+{% else %}
+    <p>Votre panier est vide</p>
+{% endif %}
+</div>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+<script>
+  // Mise à jour du panier
+ $(document).on('click', '.update-offre', function(e){
+      e.preventDefault();
+      // On récupère l'id de l'offre
+      console.log($('#select' + offreid + 'option:selected').text());
+      var offreid = $(this).data('index'); 
+      $.ajax({
+          type: 'POST',
+          url: "{% url 'panier_update' %}",
+          data: {
+              offre_id: $(this).data('index'),
+              billetqty: $('#select' + offreid + ' option:selected').text(),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post',
+          },
+          
+          success: function(json){
+              //console.log(json.qty)
+              console.log(document.getElementById("panier_quantity").textContent = json.qty)
+              location.reload();
+              
+          },
+          error: function(xhr, errmsg, err){
+
+          }
+      });
+  })
+
+  // Fonction suppression éléments panier
+  $(document).on('click', '.delete-offre', function(e){
+      e.preventDefault();
+      // On récupère l'id de l'offre
+      $.ajax({
+          type: 'POST',
+          url: "{% url 'panier_delete' %}",
+          data: {
+              offre_id: $(this).data('index'),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post',
+          },
+          
+          success: function(json){
+              //console.log(json.qty)
+
+              location.reload();
+              
+          },
+          error: function(xhr, errmsg, err){
+
+          }
+      });
+  })
+
+</script>      
+
+{% endblock %}
