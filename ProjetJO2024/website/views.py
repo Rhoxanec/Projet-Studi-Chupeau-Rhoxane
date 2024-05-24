@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Offre
+from django_otp.plugins.otp_totp.models import TOTPDevice
+#from .forms import Enable2FAForm
 
 # Create your views here.
 
@@ -75,18 +77,32 @@ def inscription(request):
     return render(request, 'inscription.html', {'form': form})
 
 def connexion(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('accueil')
-        else:
-            messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
-    return render(request, 'connexion.html')
+    #if request.method == 'POST':
+        #username = request.POST['username']
+        #password = request.POST['password']
+        #user = authenticate(request, username=username, password=password)
+        #if user is not None:
+           #login(request, user)
+           #return render(request, 'accueil')
+      #  else:
+           # messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
+    #return render(request, 'accueil')
+    return redirect('accueil')
 
-@login_required
+#@login_required
+#def enable_2fa(request):
+   # if request.method == 'POST':
+     #   form = Enable2FAForm(request.user, request.POST)
+      #  if form.is_valid():
+            # Enable 2FA for the user
+        #    device = TOTPDevice.objects.create(user=request.user)
+         #   device.save()
+          #  return redirect('verify_2fa')
+    #else:
+     #   form = Enable2FAForm(request.user)
+
+   # return render(request, 'enable_2fa.html', {'form': form})
+
 #def panier(request):
 #return render(request, 'panier.html')
 

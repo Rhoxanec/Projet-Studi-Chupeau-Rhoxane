@@ -28,7 +28,29 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'website',
     'panier',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_static',
+    'django_user_agents',
+    'django_otp.plugins.otp_email',  # <- if you want email capability.
+    'two_factor',
+    'two_factor.plugins.phonenumber',  # <- if you want phone number capability.
+    'two_factor.plugins.email',  # <- if you want email capability.
+    #'two_factor.plugins.otp_yubikey', # <- for yubikey capability.
+    'otp_yubikey',
 ]
+
+LOGIN_URL = 'two_factor:connexion'
+
+# this one is optional
+LOGIN_REDIRECT_URL = 'two_factor:accueil'
+
+#AUTHENTICATION_BACKENDS = (
+    # ...
+   # 'django_otp.backends.OTPAuthenticationBackend',
+#)
+
+#OTP_TOTP_ISSUER = 'website'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -37,7 +59,9 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'core.middleware.auth.Authentication2FAMiddleware',
 ]
 
 ROOT_URLCONF = 'ecomjo.urls'
@@ -115,6 +139,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGIN_REDIRECT_URL = '/connexion/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
