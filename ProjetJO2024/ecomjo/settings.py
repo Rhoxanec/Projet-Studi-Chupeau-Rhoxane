@@ -40,10 +40,10 @@ INSTALLED_APPS = [
     'otp_yubikey',
 ]
 
-LOGIN_URL = 'two_factor:connexion'
+LOGIN_URL = 'two_factor:login'
 
 # this one is optional
-LOGIN_REDIRECT_URL = 'two_factor:accueil'
+#LOGIN_REDIRECT_URL = 'two_factor:accueil'
 
 #AUTHENTICATION_BACKENDS = (
     # ...

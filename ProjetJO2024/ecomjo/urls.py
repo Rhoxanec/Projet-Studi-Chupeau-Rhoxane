@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from website import views
 from two_factor.urls import urlpatterns as tf_urls
 from django.contrib.auth import views as auth_views
+#from django_otp.admin import OTPAdminSite
+#admin.site.__class__= OTPAdminSite
 
 urlpatterns = [
     path('', views.accueil, name='accueil'),

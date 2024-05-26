@@ -6,6 +6,7 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Panier</h1>
+                    <p>Vous devez être connecté afin de finaliser votre réservation.</p>
                 </div>
             </div>
 </header>
@@ -57,11 +58,14 @@
     <br></br>
     {% endfor %}
     <h3>Total: {{ totals }}€</h3>
-
+    <button><a type="button" href="{% url 'e_ticket' %}" class="btn btn-success">Paiement</a></button>
 {% else %}
     <p>Votre panier est vide</p>
 {% endif %}
 </div>
+<br></br>
+<br></br>
+<br></br>
 <br></br>
 <br></br>
 <br></br>
