@@ -20,7 +20,7 @@
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
+            <div class="container px-4 px-lg-12">
                 <a class="navbar-brand" href="#"><img src="{% static 'photoJO2logo.png' %}" alt="" class="logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -33,7 +33,7 @@
                                     <li><a href="{% url 'moncompte' %}">Mon Compte</a></li>
                                     <li><a href="{% url 'deconnexion' %}">Déconnexion</a></li>
                                     {% else %}
-                                    <li><a href="{% url 'connexion' %}">Connexion</a></li>
+                                    <li><a href="{% url 'two_factor:login' %}">Connexion</a></li>
                                     {% endif %}
                             </ul>
                     </ul>
@@ -58,11 +58,14 @@
         </nav>
 
         {% block content %}
+        {% for message in messages %}
+        <li> {{ message }} </li>
+        {% endfor %}
         <!-- Tout ce qui se trouve ici est spécifique à la page mentionnée ex: .accueil.html -->
         {% endblock %}
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2024</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Website 2024</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

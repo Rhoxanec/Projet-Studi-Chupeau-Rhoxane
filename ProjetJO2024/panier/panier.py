@@ -1,4 +1,5 @@
 from website.models import Offre
+import qrcode
 
 class Panier():
     def __init__(self, request):

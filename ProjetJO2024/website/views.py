@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Offre
+from django_otp.plugins.otp_totp.models import TOTPDevice
+#from .forms import Enable2FAForm
 
 # Create your views here.
 
@@ -59,10 +61,7 @@ def moncompte(request):
     else:
         messages.success(request, "Vous devez être connecté pour accéder à cette page")
         return redirect('accueil')
-    
-
-#def panier(request):
-#    return render(request, 'panier.html')
+  
 
 def inscription(request):
     if request.method == 'POST':
@@ -75,20 +74,7 @@ def inscription(request):
     return render(request, 'inscription.html', {'form': form})
 
 def connexion(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('accueil')
-        else:
-            messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
-    return render(request, 'connexion.html')
-
-@login_required
-#def panier(request):
-#return render(request, 'panier.html')
+    return redirect('accueil')
 
 def deconnexion(request):
     logout(request)

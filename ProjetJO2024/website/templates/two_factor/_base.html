@@ -1,0 +1,43 @@
+{% extends "../base.html" %}
+
+{% block content %}
+ <!-- Header-->
+ <header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Connexion</h1>
+      </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="login d-flex align-items-center">
+    <div class="col-3 col-md-3 col-lg-3 mx-auto">
+
+      <div class="form">
+        {% block sub_content %}{% endblock %}
+      
+          <form method="post" action="{% url 'connexion' %}">
+            
+          </form>
+    
+          <br></br>
+          <p class="link">Pas encore inscrit ? <a href="{% url 'inscription' %}">S'inscrire</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+  
+  {% endblock %}
+

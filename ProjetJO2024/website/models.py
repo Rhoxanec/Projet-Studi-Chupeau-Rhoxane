@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django_otp.plugins.otp_totp.models import TOTPDevice
 import datetime
 
 
@@ -11,6 +13,11 @@ class Utilisateur(models.Model):
 
     def __str__(self) -> str:
         return f'{self.nom} {self.prenom}' 
+    
+# UserProfile 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    devices = models.ManyToManyField(TOTPDevice)
 
 # Offre
 class Offre(models.Model):
@@ -36,3 +43,6 @@ class Commande(models.Model):
 
     def __str__(self):
         return f'{self.offre}' 
+    
+
+

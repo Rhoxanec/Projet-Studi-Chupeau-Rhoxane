@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">E-ticket</h1>
+            <p>Paiement réussi, vous pouvez récupérer votre e-ticket !</p>
+        </div>
+    </div>
+</header>
+<br></br>
+<br></br>
+
+<div class="container">
+{% if ticket_data.panier_offres %}
+{% for offre in ticket_data.panier_offres %}
+
+<div class="card mb-3">
+<div class="row g-0">
+
+        <div class="col-md-4">
+        <img src="/media/{{ offre.name}}{{ ticket_data.qrcode }}" class="img-fluid rounded-start" alt="...">
+
+
+       
+       
+        </div>
+        <div class="col-md-8">
+        <div class="card-body">
+      
+        <div class="text-center">
+          <h5 class="card-title">{{ offre.name }}</h5>
+          <p class="card-text">{{ ticket_data.user_nom }} {{ ticket_data.user_prenom }}</p>
+           <div class="text-center">
+            <div class="col-md-2" id="{{offre.id}}">
+        
+        {% for key, value in ticket_data.qty.items %}
+            {% if key == offre.id|slugify %}
+             
+        
+            </div>
+            </div>
+      
+            <p class="card-text text-center">Quantité billet:{{ value }}</p>
+            <p class="card-text">Prix unitaire {{ offre.price }}€</p>
+            <button type="button" class="btn btn-dark" ><a href="/media/{{ offre.name}}{{ ticket_data.qrcode }}">Télécharger mon e-ticket</a></button>
+            {% endif %}
+            
+        {% endfor %}
+   
+        
+  
+    </div>
+  </div>
+</div>
+</div>
+<br></br>
+{% endfor %}
+<h3>Total: {{ ticket_data.totals }}€</h3>
+
+{% endif %}
+</div>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+
+
+{% endblock %}
+
