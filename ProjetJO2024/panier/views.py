@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .panier import Panier
-from website.models import Offre
+from website.models import Offre, Commande
 from django.http import JsonResponse
 from io import BytesIO
 from ecomjo import settings
 from django.contrib.auth.models import User
+from django.contrib import messages
 import base64
 import secrets 
 import qrcode
@@ -61,8 +62,10 @@ def panier_update(request):
     
 def e_ticket(request):
     panier = Panier(request)
-    panier_offres = panier.get_offres()
+    panier_offres = panier.get_offres()   
     quantities = panier.get_quantity()
+    #Commande.utilisateur = current_user
+    #Commande.quantity = quantities
     totals = panier.total()
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
@@ -73,6 +76,7 @@ def e_ticket(request):
         for offre in panier_offres: 
             qrcodeimg = qrcodeimg + username + dt + offre.name
             image = qrcode.make(qrcodeimg)
+            #Commande.offre = offre
     #votre_ticket = BytesIO()
             votre_ticket = f'votre_ticket.png'
             image.save(settings.MEDIA_ROOT + '/' + offre.name + votre_ticket)
@@ -92,5 +96,4 @@ def e_ticket(request):
         return render(request, 'e_ticket_summary.html', {'ticket_data': ticket_data})
     return render(request, 'panier_summary.html', {"panier_offres":panier_offres, 'quantities':quantities, "totals":totals})
     
-
-                                                    
+                               

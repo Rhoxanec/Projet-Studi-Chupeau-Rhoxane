@@ -58,6 +58,9 @@
         </nav>
 
         {% block content %}
+        {% for message in messages %}
+        <li> {{ message }} </li>
+        {% endfor %}
         <!-- Tout ce qui se trouve ici est spécifique à la page mentionnée ex: .accueil.html -->
         {% endblock %}
         <!-- Footer-->

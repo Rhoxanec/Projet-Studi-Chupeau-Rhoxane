@@ -43,3 +43,6 @@ class Commande(models.Model):
 
     def __str__(self):
         return f'{self.offre}' 
+    
+
+
