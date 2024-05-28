@@ -43,11 +43,7 @@ class CustomUserCreationForm (UserCreationForm):
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Adresse mail'}))
     first_name = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Prénom'}))
     last_name = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nom de famille'}))
-    #password1 = forms.CharField(
-       #label ="Password",
-       #strip=False,
-       #widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-   #)
+
 
     class Meta:
         model = User
@@ -70,19 +66,7 @@ class CustomUserCreationForm (UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirmer le mot de passe'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Entrer le mot de passe précédent, pour vérification.</small></span>'
-#    password1 = forms.CharField(
-       # label ="Password",
-       # strip=False,
-       # widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-   # )
-   # password2 = forms.CharField(
-       # label="Password confirmation",
-       # widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-       # strip=False,
-   # )
 
-   # class Meta(UserCreationForm.Meta):
-        #fields = UserCreationForm.Meta.fields + ("password1", "password2") 
 
 
 

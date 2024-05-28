@@ -34,7 +34,6 @@ def panier_add(request):
         panier_quantity = panier.__len__()
 
         # Renvoie la réponse 
-        # response = JsonResponse({'offre nom: ': offre.name})
         response = JsonResponse({"qty": panier.__len__() })
         return response
 
@@ -56,7 +55,6 @@ def panier_update(request):
         panier.update(offre=offre_id, quantity=offreqty)
 
         # Renvoie la réponse 
-        # response = JsonResponse({'offre nom: ': offre.name})
         response = JsonResponse({"qty": offreqty})
         return response
     
@@ -64,8 +62,6 @@ def e_ticket(request):
     panier = Panier(request)
     panier_offres = panier.get_offres()   
     quantities = panier.get_quantity()
-    #Commande.utilisateur = current_user
-    #Commande.quantity = quantities
     totals = panier.total()
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
@@ -76,8 +72,6 @@ def e_ticket(request):
         for offre in panier_offres: 
             qrcodeimg = qrcodeimg + username + dt + offre.name
             image = qrcode.make(qrcodeimg)
-            #Commande.offre = offre
-    #votre_ticket = BytesIO()
             votre_ticket = f'votre_ticket.png'
             image.save(settings.MEDIA_ROOT + '/' + offre.name + votre_ticket)
             
@@ -85,7 +79,6 @@ def e_ticket(request):
         ticket_data = {
             'ticket_id': qrcodeimg,
             'user_nom': username,
-            #'user_prenom': 'Le prenom de l utilisateur',
             'panier_offres': panier_offres,
             'qty': quantities,
             'totals': totals,
