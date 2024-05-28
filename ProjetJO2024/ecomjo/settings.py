@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-(up)ji+o$muuh&c2ks&2x^v_e9=g&y8olp_3uuhuiwt1q*t(oc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 PANIER_SESSION_ID ='panier'
 # Application definition
